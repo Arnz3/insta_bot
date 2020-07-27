@@ -71,7 +71,3 @@ class InstaBot:
                 driver.refresh()
             for i in range(self.pause):
                 time.sleep(60)                
-
-
-bot = InstaBot("C:\Program Files (x86)\chromedriver.exe", "a.j__art", "AJart.Insta.TikTok", "doodle", 1, 3, 60)
-bot.start()
