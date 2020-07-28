@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import random
+import sys
 
 class InstaBot:
 
@@ -16,15 +17,15 @@ class InstaBot:
         self.freq = freq
         self.ber = ber
         self.pause = pause
-
-        global driver
-        driver = webdriver.Chrome(self.PATH)
        
 
     def start(self):
+        global driver
+        driver = webdriver.Chrome(self.PATH)
+
         global run
         global comments
-        comments = ["Wowwww, great job!!", "emmazing work!", "A real work of art!", "Awesome bro!", "oofff"]
+        comments = ["Wowwww, great job!!", "emmazing work!", "A real work of art!", "Awesome bro!", "oofff", "thats fire!!!"]
 
         def login():
 
@@ -50,17 +51,19 @@ class InstaBot:
             for i in range(times):
                 like = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/div[2]/div/article/div[3]/section[1]/span[1]/button")))
                 like.click() # like
-                comment = driver.find_element_by_xpath("/html/body/div[4]/div[2]/div/article/div[3]/section[3]/div/form/textarea")
-                comment.click()
-                comment2 = driver.find_element_by_xpath("/html/body/div[4]/div[2]/div/article/div[3]/section[3]/div/form/textarea")
-                comment2.send_keys(random.choice(comments)) # comment
-                comment2.send_keys(Keys.ENTER)
+                if random.randint(0, 5) == 2: # comment 1/6
+                    comment = driver.find_element_by_xpath("/html/body/div[4]/div[2]/div/article/div[3]/section[3]/div/form/textarea")
+                    comment.click()
+                    comment2 = driver.find_element_by_xpath("/html/body/div[4]/div[2]/div/article/div[3]/section[3]/div/form/textarea")
+                    comment2.send_keys(random.choice(comments)) 
+                    comment2.send_keys(Keys.ENTER)
                 right_arrow = driver.find_element_by_xpath("/html/body/div[4]/div[1]/div/div/a[2]") # next picture
                 right_arrow.click()
             exit = driver.find_element_by_xpath('/html/body/div[4]/div[3]/button')
             exit.click()
 
         driver.get("https://www.instagram.com/")
+        driver.maximize_window()
         login()
         driver.get(f"https://www.instagram.com/explore/tags/{self.hashtag}/")
         run = True
@@ -70,8 +73,11 @@ class InstaBot:
                 time.sleep(self.ber)
                 driver.refresh()
             for i in range(self.pause):
-                time.sleep(60)                
+                time.sleep(60)
 
 
-bot = InstaBot("C:\Program Files (x86)\chromedriver.exe", "a.j__art", "AJart.Insta.TikTok", "doodle", 1, 3, 60)
-bot.start()
+    def stop(self):
+        global run
+        driver.quit()
+        run = False
+        sys.exit()

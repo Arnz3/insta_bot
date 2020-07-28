@@ -1,12 +1,17 @@
 # GUI here but not todayy
 from tkinter import *
 from main import InstaBot
+import threading
+import sys
 
 HEIGHT = 200
 WIDTH = 350
 
+run = True
 
-def start_bot():
+
+def get_info():
+	global bot
 	user = username_e.get()
 	pasw = password_e.get()
 	hashtag = hashtag_e.get()
@@ -15,9 +20,29 @@ def start_bot():
 	pause = int(pause_e.get())
 
 	bot = InstaBot("C:\Program Files (x86)\chromedriver.exe", user, pasw, hashtag, freq, ber, pause)
-	bot.start()
-	root.withdraw()
+	x.start()
 
+
+def start_bot():	
+	global run
+	while run:
+		try: 
+			bot.start()
+		except:
+			bot.stop()
+			start_bot()
+
+
+def stop_bot():
+	global run
+	run = False
+	bot.stop()
+	sys.exit()
+	
+	
+
+	
+x = threading.Thread(target=start_bot)
 
 root = Tk()
 canvas = Canvas(root, width=WIDTH, height=HEIGHT)
@@ -57,7 +82,9 @@ pause_l.place(relx=0.02, rely=0.7, relwidth=0.2)
 pause_e = Spinbox(instabot, from_=1, to=10)
 pause_e.place(relx=0.25, rely=0.7, relwidth=0.7)
 
-start = Button(instabot, text="START", command= start_bot)
-start.place(relx=0.4, rely=0.84, relwidth=0.2)
+start = Button(instabot, text="START", command=get_info)
+start.place(relx=0.2, rely=0.84, relwidth=0.2)
+start = Button(instabot, text="STOP", command=stop_bot)
+start.place(relx=0.6, rely=0.84, relwidth=0.2)
 
 root.mainloop()
