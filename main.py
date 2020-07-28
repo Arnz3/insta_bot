@@ -75,9 +75,9 @@ class InstaBot:
             for i in range(self.pause):
                 time.sleep(60)
 
-
     def stop(self):
         global run
         driver.quit()
         run = False
         sys.exit()
+          
