@@ -19,7 +19,7 @@ def get_info():
 	ber = int(ber_e.get())
 	pause = int(pause_e.get())
 
-	bot = InstaBot("C:\Program Files (x86)\chromedriver.exe", user, pasw, hashtag, freq, ber, pause)
+	bot = InstaBot("chromedriver.exe", user, pasw, hashtag, freq, ber, pause)
 	x.start()
 
 

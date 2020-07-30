@@ -79,5 +79,4 @@ class InstaBot:
         global run
         driver.quit()
         run = False
-        sys.exit()
           

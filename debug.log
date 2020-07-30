@@ -1,6 +1,0 @@
-[0728/152957.561:ERROR:process_reader_win.cc(123)] NtOpenThread: {Toegang geweigerd} Een proces heeft toegang tot een object aangevraagd, maar heeft deze toegangsrechten niet gekregen. (0xc0000022)
-[0728/152957.562:ERROR:exception_snapshot_win.cc(98)] thread ID 16752 not found in process
-[0728/152957.596:ERROR:process_reader_win.cc(123)] NtOpenThread: {Toegang geweigerd} Een proces heeft toegang tot een object aangevraagd, maar heeft deze toegangsrechten niet gekregen. (0xc0000022)
-[0728/152957.596:ERROR:exception_snapshot_win.cc(98)] thread ID 17424 not found in process
-[0728/152957.667:ERROR:process_reader_win.cc(123)] NtOpenThread: {Toegang geweigerd} Een proces heeft toegang tot een object aangevraagd, maar heeft deze toegangsrechten niet gekregen. (0xc0000022)
-[0728/152957.667:ERROR:exception_snapshot_win.cc(98)] thread ID 10504 not found in process
