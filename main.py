@@ -28,6 +28,9 @@ class InstaBot:
         comments = ["Wowwww, great job!!", "emmazing work!", "A real work of art!", "Awesome bro!", "oofff", "thats fire!!!"]
 
         def login():
+            
+            coockies = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/div/div/div/div[2]/button[1]")))
+            coockies.click()
 
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "username")))
 
@@ -35,9 +38,9 @@ class InstaBot:
             user_input.send_keys(self.user)
             pasw_input = driver.find_element_by_name("password")
             pasw_input.send_keys(self.pasw)
-            login_button = driver.find_element_by_xpath("//*[@id='react-root']/section/main/article/div[2]/div[1]/div/form/div[4]/button")
+            login_button = driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]/button')
             login_button.click()
-
+            
             not_now = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@id='react-root']/section/main/div/div/div/div/button")))
             not_now.click() # no keep signed in 
 
