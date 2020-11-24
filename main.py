@@ -29,7 +29,7 @@ class InstaBot:
 
         def login():
             
-            coockies = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/div/div/div/div[2]/button[1]")))
+            coockies = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@role="presentation"]//*[text()="Accepteren"]')))
             coockies.click()
 
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "username")))
@@ -38,13 +38,13 @@ class InstaBot:
             user_input.send_keys(self.user)
             pasw_input = driver.find_element_by_name("password")
             pasw_input.send_keys(self.pasw)
-            login_button = driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]/button')
+            login_button = driver.find_element_by_xpath('//*[@id="loginForm"]//*[text()="Aanmelden"]')
             login_button.click()
             
-            not_now = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@id='react-root']/section/main/div/div/div/div/button")))
+            not_now = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@role="main"]//*[text()="Niet nu"]')))
             not_now.click() # no keep signed in 
 
-            no_noti = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/div/div/div/div[3]/button[2]")))
+            no_noti = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@role="presentation"]//*[text()="Niet nu"]')))
             no_noti.click() # no notifications
 
 
@@ -52,17 +52,17 @@ class InstaBot:
             pictures = driver.find_elements_by_class_name("eLAPa")
             pictures[9].click()
             for i in range(times):
-                like = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/div[2]/div/article/div[3]/section[1]/span[1]/button")))
-                like.click() # like
+                like = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//article[@role="presentation"]//*[@aria-label="Vind ik leuk"]')))
+                like.click() # like                                                         
                 if random.randint(0, 5) == 2: # comment 1/6
-                    comment = driver.find_element_by_xpath("/html/body/div[4]/div[2]/div/article/div[3]/section[3]/div/form/textarea")
+                    comment = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH,'//article[@role="presentation"]//*[@aria-label="Een opmerking toevoegen..."]')))
                     comment.click()
-                    comment2 = driver.find_element_by_xpath("/html/body/div[4]/div[2]/div/article/div[3]/section[3]/div/form/textarea")
+                    comment2 = driver.find_element_by_xpath('//article[@role="presentation"]//*[@aria-label="Een opmerking toevoegen..."]')
                     comment2.send_keys(random.choice(comments)) 
                     comment2.send_keys(Keys.ENTER)
-                right_arrow = driver.find_element_by_xpath("/html/body/div[4]/div[1]/div/div/a[2]") # next picture
+                right_arrow = driver.find_element_by_xpath('//div[@role="dialog"]//*[text()="Volgende"]') # next picture
                 right_arrow.click()
-            exit = driver.find_element_by_xpath('/html/body/div[4]/div[3]/button')
+            exit = driver.find_element_by_xpath('//div[@role="dialog"]//*[@aria-label="Sluiten"]')
             exit.click()
 
         driver.get("https://www.instagram.com/")
@@ -82,4 +82,3 @@ class InstaBot:
         global run
         driver.quit()
         run = False
-          
